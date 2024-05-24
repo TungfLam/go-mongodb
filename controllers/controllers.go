@@ -1,5 +1,3 @@
-// controllers/controller.go
-
 package controllers
 
 import (
@@ -17,16 +15,12 @@ var objReturn = struct {
 	Msg:    "OK",
 }
 
-// GetAllUsersHandler lấy tất cả người dùng
 func GetAllUsersHandler(w http.ResponseWriter, r *http.Request) {
-	// Call the function to get all users
 	users, err := models.GetAllUsers()
 	if err != nil {
-		// Handle the error
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
 
-	// Send the users as JSON response
 	json.NewEncoder(w).Encode(users)
 }
