@@ -22,5 +22,8 @@ func GetAllUsersHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	json.NewEncoder(w).Encode(users)
+	objReturn.Msg = `lấy dữ liệu thành công`
+	objReturn.Data = users
+
+	json.NewEncoder(w).Encode(objReturn)
 }

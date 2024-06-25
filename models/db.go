@@ -13,14 +13,16 @@ import (
 var Database *mongo.Database
 
 func InitDB() error {
-
 	err := godotenv.Load()
 	if err != nil {
 		log.Fatalf("Error loading .env file: %v", err)
 	}
 	mongodbURI := os.Getenv("MONGODB_URI")
-	clientOptions := options.Client().ApplyURI(mongodbURI)
+	if mongodbURI == "" {
+		log.Fatalf("MONGODB_URI environment variable is not set")
+	}
 
+	clientOptions := options.Client().ApplyURI(mongodbURI)
 	client, err := mongo.Connect(context.Background(), clientOptions)
 	if err != nil {
 		return err
